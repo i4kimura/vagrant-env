@@ -45,7 +45,7 @@ Vagrant.configure(2) do |config|
   #
   config.vm.provider "virtualbox" do |vb|
     # Display the VirtualBox GUI when booting the machine
-    vb.gui = true
+    # vb.gui = true
 
     # Customize the amount of memory on the VM:
     vb.memory = "1024"
@@ -57,6 +57,18 @@ Vagrant.configure(2) do |config|
                   '--name', 'Any mass storage',
                   '--manufacturer', 'Generic',
                   '--product', 'Mass Storage Device']
+  end
+
+
+  config.vm.provision "chef_solo" do |chef|
+    chef.cookbooks_path = "./yocto-repo/site-cookbooks"
+    chef.roles_path = "./yocto-repo/roles"
+    chef.data_bags_path = "./yocto-repo/data_bags"
+    chef.add_recipe "yocto-tools"
+    # chef.add_role "web"
+
+    # You may also specify custom JSON attributes:
+    # chef.json = { mysql_password: "foo" }
   end
 
   # View the documentation for the provider you are using for more
@@ -72,8 +84,8 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-    sudo apt-get update
-    sudo apt-get install -y ubuntu-desktop
-  SHELL
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   sudo apt-get update
+  #   sudo apt-get install -y ubuntu-desktop
+  # SHELL
 end
