@@ -60,27 +60,27 @@ git "/home/vagrant/poky/meta-xilinx" do
 end
 
 
-# bash "Format Build environment" do
-#   user "vagrant"
-#   cwd "/home/vagrant/poky/"
-#   code "source ./oe-init-build-env &&
-#         cd /home/vagrant/poky/build/conf/ &&
-#         sed -i 's$/home/vagrant/poky/meta-yocto-bsp$/home/vagrant/poky/meta-yocto-bsp \
-#                   /home/vagrant/poky/meta-linaro/meta-linaro \
-#                   /home/vagrant/poky/meta-openembedded/toolchain-layer \
-#                   /home/vagrant/poky/meta-xilinx $g' bblayers.conf &&
-#         cd /home/vagrant/poky/build/conf/ &&
-#         sed -i 's/#BB_NUMBER_THREADS/BB_NUMBER_THREADS/g' local.conf &&
-#         sed -i 's/#PARALLEL_MAKE/PARALLEL_MAKE/g' local.conf &&
-#         sed -i 's/MACHINE ??= \"qemux86\"/MACHINE ?= \"zedboard-zynq7\"/g' local.conf &&
-#         sed -i 's/debug-tweaks/debug-tweaks tools-sdk/g' local.conf &&
-#         cd /home/vagrant/poky/meta-linaro/meta-linaro/conf/ &&
-#         sed -i 's/LAYERDEPENDS_linaro/#LAYERDEPENDS_linaro/g' layer.conf &&
-#         echo 'LAYERDEPENDS_linaro-toolchain = \"meta-networking\"' >> layer.conf &&
-#         cd /home/vagrant/poky/build/ &&
-#         bitbake core-image-minimal"
-#   action :run
-# end
+bash "Format Build environment" do
+  user "vagrant"
+  cwd "/home/vagrant/poky/"
+  code "source ./oe-init-build-env &&
+        cd /home/vagrant/poky/build/conf/ &&
+        sed -i 's$/home/vagrant/poky/meta-yocto-bsp$/home/vagrant/poky/meta-yocto-bsp \
+                  /home/vagrant/poky/meta-linaro/meta-linaro \
+                  /home/vagrant/poky/meta-openembedded/toolchain-layer \
+                  /home/vagrant/poky/meta-xilinx $g' bblayers.conf &&
+        cd /home/vagrant/poky/build/conf/ &&
+        sed -i 's/#BB_NUMBER_THREADS/BB_NUMBER_THREADS/g' local.conf &&
+        sed -i 's/#PARALLEL_MAKE/PARALLEL_MAKE/g' local.conf &&
+        sed -i 's/MACHINE ??= \"qemux86\"/MACHINE ?= \"zedboard-zynq7\"/g' local.conf &&
+        sed -i 's/debug-tweaks/debug-tweaks tools-sdk/g' local.conf &&
+        cd /home/vagrant/poky/meta-linaro/meta-linaro/conf/ &&
+        sed -i 's/LAYERDEPENDS_linaro/#LAYERDEPENDS_linaro/g' layer.conf &&
+        echo 'LAYERDEPENDS_linaro-toolchain = \"meta-networking\"' >> layer.conf &&
+        cd /home/vagrant/poky/build/ &&
+        bitbake core-image-minimal"
+  action :run
+end
 
 
 bash "Format Build environment" do
