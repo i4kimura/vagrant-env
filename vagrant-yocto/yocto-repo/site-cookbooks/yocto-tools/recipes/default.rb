@@ -64,6 +64,7 @@ bash "Format Build environment" do
   user "vagrant"
   environment "HOME" => "/home/vagrant"
   cwd "/home/vagrant/poky/"
+  timeout 36000
   code <<-EOS
   source ./oe-init-build-env
   cd /home/vagrant/poky/build/conf/
