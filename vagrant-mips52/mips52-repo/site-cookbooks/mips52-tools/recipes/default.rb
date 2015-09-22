@@ -20,7 +20,8 @@ packages = %w{g++ bison flex libmpc-dev  libmpfr-dev libgmp-dev texinfo libexpat
               libncurses5-dev cmake libxml2-dev python-dev swig doxygen subversion
               libedit-dev git libtool automake libhidapi-dev libusb-1.0-0-dev
               graphviz gawk gtkterm silversearcher-ag
-              liblua5.2-dev libbfd-dev binutils-dev}
+              liblua5.2-dev libbfd-dev binutils-dev
+              emacs lua-mode}
 packages.each do |pkg|
   package pkg do
     action [:install, :upgrade]
@@ -258,12 +259,4 @@ execute "extract MTI Baremetal" do
   user "vagrant"
   group "vagrant"
   action :run
-end
-
-
-packages = %w{emacs}
-packages.each do |pkg|
-  package pkg do
-    action [:install, :upgrade]
-  end
 end
