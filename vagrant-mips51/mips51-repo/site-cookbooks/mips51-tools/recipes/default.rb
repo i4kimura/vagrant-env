@@ -47,8 +47,8 @@ execute "extract binutils" do
 end
 
 directory "#{binutils_build_dir}" do
-  owner 'root'
-  group 'root'
+  owner 'vagrant'
+  group 'vagrant'
   mode '0755'
   action :create
 end
@@ -116,8 +116,8 @@ execute "build gcc-2" do
 end
 
 directory "/home/vagrant/software" do
-  owner 'root'
-  group 'root'
+  owner 'vagrant'
+  group 'vagrant'
   mode '0755'
   action :create
 end
@@ -137,6 +137,8 @@ end
 git "/home/vagrant/swimmer_mips" do
   repository "https://github.com/msyksphinz/swimmer_riscv.git"
   revision "master"
+  user "vagrant"
+  group "vagrant"
   action :sync
 end
 
@@ -147,6 +149,8 @@ execute "build-swimmer-mips" do
            cd vendor/gflags  # for building Google Flags
            cmake .
            make"
+  user "vagrant"
+  group "vagrant"
   action :run
 end
 
@@ -154,6 +158,8 @@ end
 execute "build-swimmer-mips" do
   cwd "/home/vagrant/swimmer_mips/build_mips"
   command "cmake . && make clean && make"
+  user "vagrant"
+  group "vagrant"
   action :run
 end
 
@@ -162,6 +168,8 @@ end
 git "/home/vagrant/u-boot-mips" do
   repository "git://git.denx.de/u-boot-mips.git"
   revision "master"
+  user "vagrant"
+  group "vagrant"
   action :sync
 end
 
@@ -169,13 +177,17 @@ end
 # Install XV6-MIPS
 git "/home/vagrant/xv6-mips" do
   repository "https://github.com/msyksphinz/xv6-mips.git"
-  revision "master"
+  revision "feature/mipsel-linux-elf"
+  user "vagrant"
+  group "vagrant"
   action :sync
 end
 # Install XV6-x86
 git "/home/vagrant/xv6-public" do
   repository "https://github.com/mit-pdos/xv6-public.git"
   revision "master"
+  user "vagrant"
+  group "vagrant"
   action :sync
 end
 
@@ -184,6 +196,8 @@ end
 git "/home/vagrant/benchmarks" do
   repository "https://github.com/msyksphinz/benchmarks.git"
   revision "master"
+  user "vagrant"
+  group "vagrant"
   action :sync
 end
 
@@ -191,42 +205,58 @@ end
 # Download MIPS official gcc
 
 remote_file "/home/vagrant/software/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz" do
+  user "vagrant"
+  group "vagrant"
   source "http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.01-7/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz"
 end
 
 remote_file "/home/vagrant/software/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.IMG.Linux.CentOS-5.x86_64.tar.gz" do
+  user "vagrant"
+  group "vagrant"
   source "http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.01-7/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.IMG.Linux.CentOS-5.x86_64.tar.gz"
 end
 
 remote_file "/home/vagrant/software/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.MTI.Bare.Metal.CentOS-5.x86_64.tar.gz" do
+  user "vagrant"
+  group "vagrant"
   source "http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.01-7/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.MTI.Bare.Metal.CentOS-5.x86_64.tar.gz"
 end
 
 remote_file "/home/vagrant/software/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.IMG.Bare.Metal.CentOS-5.x86_64.tar.gz" do
+  user "vagrant"
+  group "vagrant"
   source "http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.01-7/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.IMG.Bare.Metal.CentOS-5.x86_64.tar.gz"
 end
 
 execute "extract MTI Linux" do
   cwd "/home/vagrant/software"
   command "tar xfz Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz"
+  user "vagrant"
+  group "vagrant"
   action :run
 end
 
 execute "extract MTI Baremetal" do
   cwd "/home/vagrant/software"
   command "tar xfz Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.MTI.Bare.Metal.CentOS-5.x86_64.tar.gz"
+  user "vagrant"
+  group "vagrant"
   action :run
 end
 
 execute "extract IMG Linux" do
   cwd "/home/vagrant/software"
   command "tar xfz Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.IMG.Linux.CentOS-5.x86_64.tar.gz"
+  user "vagrant"
+  group "vagrant"
   action :run
 end
 
 execute "extract MTI Baremetal" do
   cwd "/home/vagrant/software"
   command "tar xfz Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.IMG.Bare.Metal.CentOS-5.x86_64.tar.gz"
+  user "vagrant"
+  group "vagrant"
   action :run
 end
 
