@@ -1,6 +1,6 @@
 {
   "run_list": [
-      "mips52-tools"
+      "tensorflow-tools"
   ],
   "automatic": {
     "ipaddress": "192.168.33.10"
