@@ -24,7 +24,7 @@ packages.each do |pkg|
   end
 end
 
-# Install Swimmer-MIPS
+# Download source code of TensorFlow
 git "/home/vagrant/tensorflow" do
   repository "https://github.com/tensorflow/tensorflow"
   revision "master"
