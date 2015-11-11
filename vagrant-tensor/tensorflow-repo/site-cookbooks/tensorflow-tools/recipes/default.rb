@@ -29,6 +29,8 @@ git "/home/vagrant/tensorflow" do
   repository "https://github.com/tensorflow/tensorflow"
   revision "master"
   enable_submodules true
+  user "vagrant"
+  group "vagrant"
   action :sync
 end
 
