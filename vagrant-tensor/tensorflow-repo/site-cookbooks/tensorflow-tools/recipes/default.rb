@@ -15,9 +15,11 @@ execute "sed apt-source" do
   command "sed -i -e 's%http://archive.ubuntu.com/ubuntu%http://ftp.iij.ad.jp/pub/linux/ubuntu/archive%g' /etc/apt/sources.list"
 end.run_action(:run)
 
-packages = %w{g++ bison flex libncurses5-dev cmake swig
-              git libtool automake silversearcher-ag emacs
-              python-pip}
+packages = %w{g++ bison flex libmpc-dev  libmpfr-dev libgmp-dev texinfo libexpat1-dev
+              libncurses5-dev cmake libxml2-dev python-dev swig doxygen subversion
+              libedit-dev git libtool automake libhidapi-dev libusb-1.0-0-dev
+              graphviz gawk gtkterm silversearcher-ag zip unzip zlib1g-dev
+              liblua5.2-dev libbfd-dev binutils-dev openjdk-8-jdk}
 packages.each do |pkg|
   package pkg do
     action [:install, :upgrade]
@@ -28,6 +30,15 @@ end
 git "/home/vagrant/tensorflow" do
   repository "https://github.com/tensorflow/tensorflow"
   revision "master"
+  enable_submodules true
+  user "vagrant"
+  group "vagrant"
+  action :sync
+end
+
+git "/home/vagrant/bazel" do
+  repository "https://github.com/bazelbuild/bazel.git"
+  revision "0.1.1"
   enable_submodules true
   user "vagrant"
   group "vagrant"
