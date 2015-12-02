@@ -205,33 +205,33 @@ end
 
 # Download MIPS official gcc
 
-remote_file "/home/vagrant/software/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz" do
+remote_file "/home/vagrant/software/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz" do
   user "vagrant"
   group "vagrant"
-  source "http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.01-7/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz"
+  source "http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.06-05/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz"
 end
 
-remote_file "/home/vagrant/software/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.IMG.Linux.CentOS-5.x86_64.tar.gz" do
+remote_file "/home/vagrant/software/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.IMG.Linux.CentOS-5.x86_64.tar.gz" do
   user "vagrant"
   group "vagrant"
-  source "http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.01-7/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.IMG.Linux.CentOS-5.x86_64.tar.gz"
+  source "http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.06-05/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.IMG.Linux.CentOS-5.x86_64.tar.gz"
 end
 
-remote_file "/home/vagrant/software/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.MTI.Bare.Metal.CentOS-5.x86_64.tar.gz" do
+remote_file "/home/vagrant/software/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Bare.Metal.CentOS-5.x86_64.tar.gz" do
   user "vagrant"
   group "vagrant"
-  source "http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.01-7/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.MTI.Bare.Metal.CentOS-5.x86_64.tar.gz"
+  source "http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.06-05/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Bare.Metal.CentOS-5.x86_64.tar.gz"
 end
 
-remote_file "/home/vagrant/software/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.IMG.Bare.Metal.CentOS-5.x86_64.tar.gz" do
+remote_file "/home/vagrant/software/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.IMG.Bare.Metal.CentOS-5.x86_64.tar.gz" do
   user "vagrant"
   group "vagrant"
-  source "http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.01-7/Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.IMG.Bare.Metal.CentOS-5.x86_64.tar.gz"
+  source "http://codescape-mips-sdk.imgtec.com/components/toolchain/2015.06-05/Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.IMG.Bare.Metal.CentOS-5.x86_64.tar.gz"
 end
 
 execute "extract MTI Linux" do
   cwd "/home/vagrant/software"
-  command "tar xfz Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz"
+  command "tar xfz Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Linux.CentOS-5.x86_64.tar.gz"
   user "vagrant"
   group "vagrant"
   action :run
@@ -239,7 +239,7 @@ end
 
 execute "extract MTI Baremetal" do
   cwd "/home/vagrant/software"
-  command "tar xfz Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.MTI.Bare.Metal.CentOS-5.x86_64.tar.gz"
+  command "tar xfz Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.MTI.Bare.Metal.CentOS-5.x86_64.tar.gz"
   user "vagrant"
   group "vagrant"
   action :run
@@ -247,7 +247,7 @@ end
 
 execute "extract IMG Linux" do
   cwd "/home/vagrant/software"
-  command "tar xfz Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.IMG.Linux.CentOS-5.x86_64.tar.gz"
+  command "tar xfz Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.IMG.Linux.CentOS-5.x86_64.tar.gz"
   user "vagrant"
   group "vagrant"
   action :run
@@ -255,7 +255,7 @@ end
 
 execute "extract MTI Baremetal" do
   cwd "/home/vagrant/software"
-  command "tar xfz Codescape.GNU.Tools.Package.2015.01-7.for.MIPS.IMG.Bare.Metal.CentOS-5.x86_64.tar.gz"
+  command "tar xfz Codescape.GNU.Tools.Package.2015.06-05.for.MIPS.IMG.Bare.Metal.CentOS-5.x86_64.tar.gz"
   user "vagrant"
   group "vagrant"
   action :run
