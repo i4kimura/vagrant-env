@@ -1,0 +1,6 @@
+site :opscode
+
+cookbook 'yum-epel'
+cookbook 'build-essential'
+
+cookbook "python",      path: "site-cookbooks/python"
