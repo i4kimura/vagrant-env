@@ -1,3 +1,0 @@
-[submodule "riscv-repo/site-cookbooks/riscv-tools"]
-	path = riscv-repo/site-cookbooks/riscv-tools
-	url = https://github.com/msyksphinz/riscv-tools.git
