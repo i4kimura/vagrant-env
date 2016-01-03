@@ -3,9 +3,73 @@
   connection: local
   sudo: yes
   tasks:
-    - name: install ruby
-      apt: pkg=ruby update_cache=yes
-    - name: install rubygems
-      apt: pkg=rubygems update_cache=yes
-    - name: install bundler
-      command: gem install bundler
+    - name: ufw settings
+      ufw: state=enabled policy=allow
+    - name: ufw-port-ssh
+      ufw: rule=allow port=ssh
+    - name: ufw-port-8069
+      ufw: rule=allow port=8069 proto=tcp
+
+    - name: Install list of packages
+      apt: pkg={{item}} state=installed
+      with_items:
+        - subversion
+        - git
+        - bzr
+        - bzrtools
+        - python-pip
+        - postgresql
+        - postgresql-server-dev-9.3
+        - python-all-dev
+        - python-dev
+        - python-setuptools
+        - libxml2-dev
+        - libxslt1-dev
+        - libevent-dev
+        - libsasl2-dev
+        - libldap2-dev
+        - pkg-config
+        - libtiff5-dev
+        - libjpeg8-dev
+        - libjpeg-dev
+        - zlib1g-dev
+        - libfreetype6-dev
+        - liblcms2-dev
+        - liblcms2-utils
+        - libwebp-dev
+        - tcl8.6-dev
+        - tk8.6-dev
+        - python-tk
+        - libyaml-dev
+        - fontconfig
+
+    - group: name=odoo state=present system=yes
+    - user: name=odoo group=odoo home=/opt/odoo system=yes
+    - git: repo=https://github.com/odoo/odoo.git dest=/opt/odoo/odoo-repo update=yes depth=1 version=9.0
+    - pip: requirements=/opt/odoo/odoo-repo/doc/requirements.txt
+    - pip: requirements=/opt/odoo/odoo-repo/requirements.txt
+    - postgresql_user: name=odoo password=odoo role_attr_flags=SUPERUSER
+      sudo: yes
+      sudo_user: postgres
+    - name: download setup
+      get_url: url=https://deb.nodesource.com/setup dest=/opt/odoo
+    - file: path=/opt/odoo/setup state=touch mode="u+rwx,g+rx,o+rx"
+    - shell: /opt/odoo/setup
+    - apt: pkg=nodejs
+    - npm: name=less global=yes
+    - npm: name=less-plugin-clean-css global=yes
+    - name: download deb
+      get_url: url=http://download.gna.org/wkhtmltopdf/0.12/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb dest=/tmp
+    - name: wkhtmltox install
+      apt: deb=/tmp/wkhtmltox-0.12.1_linux-trusty-amd64.deb
+    - command: cp /usr/local/bin/wkhtmltopdf /usr/bin/wkhtmltopdf
+    - command: cp /usr/local/bin/wkhtmltoimage /usr/bin/wkhtmltoimage
+    - name: copy odoo-server.conf
+      command: cp /vagrant/odoo-server.conf /etc/odoo-server.conf
+    - name: copy odoo-server
+      command: cp /vagrant/odoo-server /etc/init.d/odoo-server
+    - file: path=/etc/init.d/odoo-server state=touch mode="755"
+    - file: path=/etc/init.d/odoo-server state=touch owner="root"
+    - file: path=/var/log/odoo state=directory mode=0755
+    - name: start odoo-server
+      command: /etc/init.d/odoo-server start
