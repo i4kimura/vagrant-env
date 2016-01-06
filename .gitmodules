@@ -1,0 +1,3 @@
+[submodule "vagrant-riscv/riscv-repo/site-cookbooks/riscv-tools"]
+	path = vagrant-riscv/riscv-repo/site-cookbooks/riscv-tools
+	url = https://github.com/msyksphinz/riscv-tools.git
