@@ -1,0 +1,10 @@
+---
+- hosts: 127.0.0.1
+  remote_user: vagrant
+  tasks:
+    - name: install node-js v0.12.4
+      raw: nvm install v0.12.4
+    - name: alias node-js v0.12.4
+      raw: nvm alias default v0.12.4
+    - name: install git
+      yum: name=git state=latest

@@ -1,0 +1,14 @@
+---
+- hosts: 127.0.0.1
+  remote_user: vagrant
+  tasks:
+    - name: install git
+      yum: name=git state=latest
+    - name: get nvm install-shell
+      get_url: url=https://raw.githubusercontent.com/creationix/nvm/v0.25.3/install.sh dest=/home/vagrant/install.sh
+    - name: change mode
+      file: path=/home/vagrant/install.sh mode=0755
+    - name: install nvm
+      shell: /home/vagrant/install.sh
+    - name: install env
+      raw: source /home/vagrant/.bashrc
