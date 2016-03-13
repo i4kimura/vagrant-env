@@ -135,8 +135,9 @@ end
 
 
 # Install Swimmer-MIPS
-git "/home/vagrant/swimmer_mips" do
-  repository "https://github.com/msyksphinz/swimmer_riscv.git"
+git "/home/vagrant/swimmer_iss" do
+  repository "https://github.com/msyksphinz/swimmer_iss.git"
+  revision "master"
   user "vagrant"
   group "vagrant"
   revision "master"
@@ -144,7 +145,7 @@ git "/home/vagrant/swimmer_mips" do
 end
 
 execute "build-swimmer-mips" do
-  cwd "/home/vagrant/swimmer_mips"
+  cwd "/home/vagrant/swimmer_iss"
   command "git submodule init &&
            git submodule update &&
            cd vendor/gflags  # for building Google Flags
@@ -157,7 +158,7 @@ end
 
 
 execute "build-swimmer-mips" do
-  cwd "/home/vagrant/swimmer_mips/build_mips"
+  cwd "/home/vagrant/swimmer_iss/build_mips"
   command "cmake . && make clean && make"
   user "vagrant"
   group "vagrant"

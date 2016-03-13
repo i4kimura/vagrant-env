@@ -22,3 +22,10 @@ cat << _EOT_ >> $home/.bashrc
 source ~/.nvm/nvm.sh
 nvm use $node_version > /dev/null
 _EOT_
+
+
+sudo sed -i 's/Defaults    env_reset/Defaults    !env_reset/g' /etc/sudoers
+sudo sed -i 's/# Defaults    env_keep/Defaults    env_keep/g' /etc/sudoers
+sudo sed -i 's/Defaults    secure_path/# Defaults    secure_path/g' /etc/sudoers
+
+npm install request
