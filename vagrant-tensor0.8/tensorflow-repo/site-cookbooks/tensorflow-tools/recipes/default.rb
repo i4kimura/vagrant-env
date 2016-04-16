@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: mips51-tools
+# Cookbook Name:: TensorFlow
 # Recipe:: default
 #
 # Copyright 2015, YOUR_COMPANY_NAME
@@ -64,7 +64,7 @@ end
 
 execute "extract pip_python" do
   cwd "/home/vagrant/"
-  command "pip install https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.5.0-cp27-none-linux_x86_64.whl"
+  command "pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.8.0rc0-cp27-none-linux_x86_64.whl"
   action :run
 end
 
@@ -92,8 +92,8 @@ execute "install numpy-1.10.4" do
 end
 
 
-remote_file "/home/vagrant/download/bazel-0.1.5-installer-linux-x86_64.sh" do
-  source "https://github.com/bazelbuild/bazel/releases/download/0.1.5/bazel-0.1.5-installer-linux-x86_64.sh"
+remote_file "/home/vagrant/download/bazel-0.2.1-installer-linux-x86_64.sh" do
+  source "https://github.com/bazelbuild/bazel/releases/download/0.2.1/bazel-0.2.1-installer-linux-x86_64.sh"
   owner 'vagrant'
   group 'vagrant'
   mode '0755'
@@ -101,7 +101,7 @@ remote_file "/home/vagrant/download/bazel-0.1.5-installer-linux-x86_64.sh" do
 end
 
 
-file "/home/vagrant/download/bazel-0.1.5-installer-linux-x86_64.sh" do
+file "/home/vagrant/download/bazel-0.2.1-installer-linux-x86_64.sh" do
   mode '0755'
 end
 
@@ -109,7 +109,7 @@ execute "install bazel" do
   user "vagrant"
   environment "HOME" => "/home/vagrant"
   cwd "/home/vagrant/download/"
-  command "./bazel-0.1.5-installer-linux-x86_64.sh --user --prefix=/home/vagrant/ --bin=/home/vagrant/bin --base=/home/vagrant/.bazel --bazelrc=/home/vagrant/.bazelrc"
+  command "./bazel-0.2.1-installer-linux-x86_64.sh --user --prefix=/home/vagrant/ --bin=/home/vagrant/bin --base=/home/vagrant/.bazel --bazelrc=/home/vagrant/.bazelrc"
 end
 
 execute "extract python_pip grpcio" do
