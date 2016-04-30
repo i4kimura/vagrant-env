@@ -1,0 +1,1 @@
+{"virtualbox":{"/vagrant":{"mount_options":["dmode=775","fmode=664"],"guestpath":"/vagrant","hostpath":"C:/msys64/home/masayuki/vagrant-env/vagrant-gcc61/share","disabled":false,"__vagrantfile":true}}}
