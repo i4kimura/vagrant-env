@@ -1,6 +1,6 @@
 {
   "run_list": [
-      "mips53-tools"
+      "gcc61-tools"
   ],
   "automatic": {
     "ipaddress": "192.168.33.10"

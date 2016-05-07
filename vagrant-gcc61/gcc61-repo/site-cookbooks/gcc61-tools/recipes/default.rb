@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: mips53-tools
+# Cookbook Name:: gcc61-tools
 # Recipe:: default
 #
 # Copyright 2015, YOUR_COMPANY_NAME
