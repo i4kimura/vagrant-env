@@ -25,8 +25,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.11"
-  config.ssh.forward_x11 = true
+  # config.vm.network "private_network", ip: "192.168.33.11"
+  # config.ssh.forward_x11 = true
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -89,10 +89,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # some recipes and/or roles.
   #
   config.vm.provision "chef_solo" do |chef|
-    chef.cookbooks_path = "./mips53-repo/site-cookbooks"
-    chef.roles_path = "./mips53-repo/roles"
-    chef.data_bags_path = "./mips53-repo/data_bags"
-    chef.add_recipe "mips53-tools"
+    chef.cookbooks_path = "./gcc61-repo/site-cookbooks"
+    chef.roles_path = "./gcc61-repo/roles"
+    chef.data_bags_path = "./gcc61-repo/data_bags"
+    chef.add_recipe "gcc61-tools"
     # chef.add_role "web"
 
     # You may also specify custom JSON attributes:
