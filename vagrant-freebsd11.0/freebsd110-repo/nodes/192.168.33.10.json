@@ -1,0 +1,8 @@
+{
+  "run_list": [
+      "freebsd1003-tools"
+  ],
+  "automatic": {
+      "ipaddress": "192.168.33.10"
+  }
+}
