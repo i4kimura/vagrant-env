@@ -57,7 +57,7 @@ git clone https://github.com/freebsd-riscv/riscv-pk
 cd riscv-pk
 mkdir build && cd build
 setenv PREFIX $HOME/riscv
-setenv MYOBJDIR "/home/vagrant/obj/riscv/"
+setenv MYOBJDIR "/home/vagrant/obj/riscv.riscv64/home/vagrant/dev/freebsd-riscv/"
 setenv CFLAGS "-msoft-float --sysroot=${MYOBJDIR}/tmp"
 setenv CXX "c++"
 setenv CPP "cpp"
