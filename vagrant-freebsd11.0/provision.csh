@@ -2,7 +2,7 @@
 
 setenv PREFIX /home/vagrant/riscv
 
-pkg install -y bison gmp mpfr mpc git subversion texinfo gmake gawk gsed
+sudo pkg install -y bison gmp mpfr mpc git subversion texinfo gmake gawk gsed
 
 ###################
 # Build Toolchain #
@@ -18,6 +18,7 @@ gmake freebsd
 # Build FreeBSD #
 #################
 
+cd /home/vagrant/
 svn co http://svn.freebsd.org/base/head freebsd-riscv
 cd freebsd-riscv
 
@@ -51,6 +52,7 @@ tools/tools/makeroot/makeroot.sh -s 32m -f basic.files riscv.img $DESTDIR
 # Build bbl #
 #############
 
+cd /home/vagrant/
 git clone https://github.com/freebsd-riscv/riscv-pk
 cd riscv-pk
 mkdir build && cd build
@@ -61,6 +63,6 @@ setenv CXX "c++"
 setenv CPP "cpp"
 setenv LDFLAGS "-L. -L${MYOBJDIR}/tmp/usr/lib/"
 setenv PATH "${PATH}:${PREFIX}/bin"
-../configure --prefix=$PREFIX --host=riscv64-unknown-freebsd11.0 --with-payload=path_to_freebsd_kernel
+../configure --prefix=$PREFIX --host=riscv64-unknown-freebsd11.0 --with-payload=/home/vagrant/riscv-gnu-toolchain/freebsd-riscv/
 gmake
 #Note: unset these ENV variables to proceed to next steps
