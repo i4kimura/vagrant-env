@@ -71,12 +71,24 @@ gmake
 #########################
 # Build Spike simulator #
 #########################
-unset PREFIX
-unset MYOBJDIR
-unset CFLAGS
-unset CXX
-unset CPP
-unset LDFLAGS
+unsetenv PREFIX
+unsetenv MYOBJDIR
+unsetenv CFLAGS
+unsetenv CXX
+unsetenv CPP
+unsetenv LDFLAGS
+
+unsetenv WITHOUT_SHAREDOCS
+unsetenv MAKEOBJDIRPREFIX
+unsetenv CROSS_BINUTILS_PREFIX
+unsetenv STRIPBIN
+unsetenv XCC
+unsetenv XCXX
+unsetenv XCPP
+
+unsetenv X_COMPILER_TYPE
+unsetenv WITHOUT_FORMAT_EXTENSIONS
+unsetenv WITHOUT_NTP
 
 cd /home/vagrant
 # Use clang on FreeBSD
