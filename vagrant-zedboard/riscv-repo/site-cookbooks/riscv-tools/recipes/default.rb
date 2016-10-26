@@ -22,7 +22,7 @@ execute "update package index" do
   action :nothing
 end.run_action(:run)
 
-packages = %w{autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf gcc libc6-dev pkg-config bridge-utils uml-utilities zlib1g-dev libglib2.0-dev autoconf automake libtool libsdl1.2-dev emacs git default-jre default-jdk lib32z1 lib32ncurses5 lib32stdc++6 libssl-dev device-tree-compiler}
+packages = %w{autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf gcc libc6-dev pkg-config bridge-utils uml-utilities zlib1g-dev libglib2.0-dev autoconf automake libtool libsdl1.2-dev emacs git default-jre default-jdk lib32z1 lib32ncurses5 lib32stdc++6 libssl-dev device-tree-compiler bc}
 
 packages.each do |pkg|
   package pkg do
@@ -38,14 +38,6 @@ git "/home/vagrant/u-boot-xlnx" do
   user "vagrant"
   group "vagrant"
 end
-
-# execute "remove include/configs/zynq_zed.h" do
-#   cwd "/home/vagrant/u-boot-xlnx/"
-#   command "rm -rf include/configs/zynq_zed.h"
-#   action :run
-#   user "vagrant"
-#   group "vagrant"
-# end
 
 execute "copy include/configs/zynq-common.h" do
   cwd "/home/vagrant/u-boot-xlnx/"
@@ -86,6 +78,25 @@ execute "replace 3" do
   action :run
   user "vagrant"
   group "vagrant"
+end
+
+
+execute "Installing Vivado 2016.2 (1)" do
+  command "tar xfz /vagrant/shared/Xilinx_Vivado_SDK_2016.2_0605_1.tar.gz -C /home/vagrant/"
+  action :run
+  user "vagrant"
+  group "vagrant"
+end
+
+execute "Installing Vivado 2016.2 (2)" do
+  cwd "/home/vagrant/Xilinx_Vivado_SDK_2016.2_0605_1"
+  command "./xsetup --agree XilinxEULA,3rdPartyEULA,WebTalkTerms --batch Install --config /vagrant/shared/install_config.txt"
+  action :run
+end
+
+directory "/home/vagrant/Xilinx_Vivado_SDK_2016.2_0605_1" do
+  action :delete
+  recursive true
 end
 
 
