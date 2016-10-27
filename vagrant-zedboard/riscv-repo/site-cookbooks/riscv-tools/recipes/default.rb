@@ -146,7 +146,7 @@ end
 
 execute "Sed IP version (1)" do
   cwd "/home/vagrant/hdl/"
-  command "sed -i 's/2015.2.1/2015.2/g' library/scripts/adi_ip.tcl"
+  command "sed -i 's/#{node['vivado']['version']}.1/#{node['vivado']['version']}/g' library/scripts/adi_ip.tcl"
   action :run
   user  "vagrant"
   group "vagrant"
@@ -155,20 +155,16 @@ end
 
 execute "Sed IP version (2)" do
   cwd "/home/vagrant/hdl/"
-  command "sed -i 's/2015.2.1/2015.2/g' projects/scripts/adi_project.tcl"
+  command "sed -i 's/#{node['vivado']['version']}.1/#{node['vivado']['version']}/g' projects/scripts/adi_project.tcl"
   action :run
   user  "vagrant"
   group "vagrant"
 end
 
 
-bash "make project" do
+execute "make project" do
   cwd "/home/vagrant/hdl/projects/adv7511/zed"
-  code <<-EOS
-       source /opt/Xilinx/Vivado/#{node['vivado']['version']}/settings64.sh
-       unset LD_LIBRARY_PATH
-       make
-   EOS
+  command "source /opt/Xilinx/Vivado/#{node['vivado']['version']}/settings64.sh && make"
   action :run
   user  "vagrant"
   group "vagrant"
