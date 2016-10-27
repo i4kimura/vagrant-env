@@ -162,9 +162,14 @@ execute "Sed IP version (2)" do
 end
 
 
-execute "make project" do
+bash "make project" do
   cwd "/home/vagrant/hdl/projects/adv7511/zed"
-  command "source /opt/Xilinx/Vivado/#{node['vivado']['version']}/settings64.sh && make"
+  code <<-EOS
+       source /opt/Xilinx/Vivado/#{node['vivado']['version']}/settings64.sh
+       unset LD_LIBRARY_PATH
+       make
+   EOS
+  environment "HOME" => "/home/vagrant"
   action :run
   user  "vagrant"
   group "vagrant"
