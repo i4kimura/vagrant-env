@@ -32,7 +32,7 @@ end
 
 git "/home/vagrant/u-boot-xlnx" do
   repository "https://github.com/Xilinx/u-boot-xlnx.git"
-  revision "xilinx-v2016.2"
+  revision "xilinx-v#{node['vivado']['version']}"
   enable_submodules true
   action :sync
   user "vagrant"
@@ -81,20 +81,38 @@ execute "replace 3" do
 end
 
 
-execute "Installing Vivado 2016.2 (1)" do
-  command "tar xfz /vagrant/shared/Xilinx_Vivado_SDK_2016.2_0605_1.tar.gz -C /home/vagrant/"
+execute "Installing Vivado (1)" do
+  command "tar xfz /vagrant/shared/#{node['vivado']['file_head']}_#{node['vivado']['version']}_#{node['vivado']['date']}_1.tar.gz -C /home/vagrant/"
   action :run
   user "vagrant"
   group "vagrant"
 end
 
-execute "Installing Vivado 2016.2 (2)" do
-  cwd "/home/vagrant/Xilinx_Vivado_SDK_2016.2_0605_1"
+execute "Installing Vivado (2)" do
+  cwd "/home/vagrant/#{node['vivado']['file_head']}_#{node['vivado']['version']}_#{node['vivado']['date']}_1"
   command "./xsetup --agree XilinxEULA,3rdPartyEULA,WebTalkTerms --batch Install --config /vagrant/shared/install_config.txt"
   action :run
 end
 
-directory "/home/vagrant/Xilinx_Vivado_SDK_2016.2_0605_1" do
+
+execute "Creating .Xilinx" do
+  cwd "/home/vagrant/"
+  command "mkdir -p .Xilinx"
+  user  "vagrant"
+  group "vagrant"
+  action :run
+end
+
+
+remote_file "/home/vagrant/.Xilinx/Xilinx.lic" do
+  source "file:///vagrant/shared/Xilinx.lic"
+  owner "vagrant"
+  group "vagrant"
+  mode 0755
+end
+
+
+directory "/home/vagrant/#{node['vivado']['file_head']}_#{node['vivado']['version']}_#{node['vivado']['date']}_1" do
   action :delete
   recursive true
 end
@@ -103,13 +121,55 @@ end
 bash "make zedboard" do
   cwd "/home/vagrant/u-boot-xlnx/"
   code <<-EOS
-       source /opt/Xilinx/SDK/2016.2/settings64.sh
+       source /opt/Xilinx/SDK/#{node['vivado']['version']}/settings64.sh
        export CROSS_COMPILE=arm-xilinx-linux-gnueabi-
        unset LD_LIBRARY_PATH
        make zynq_zed_config
        make
    EOS
   action :run
+  user  "vagrant"
+  group "vagrant"
+end
+
+#       source /opt/Xilinx/SDK/#{node['vivado']['version']}/settings64.sh
+
+git "/home/vagrant/hdl" do
+  repository "https://github.com/analogdevicesinc/hdl.git"
+  revision "hdl_2015_r2"
+  enable_submodules true
+  action :sync
   user "vagrant"
+  group "vagrant"
+end
+
+
+execute "Sed IP version (1)" do
+  cwd "/home/vagrant/hdl/"
+  command "sed -i 's/2015.2.1/2015.2/g' library/scripts/adi_ip.tcl"
+  action :run
+  user  "vagrant"
+  group "vagrant"
+end
+
+
+execute "Sed IP version (2)" do
+  cwd "/home/vagrant/hdl/"
+  command "sed -i 's/2015.2.1/2015.2/g' projects/scripts/adi_project.tcl"
+  action :run
+  user  "vagrant"
+  group "vagrant"
+end
+
+
+bash "make project" do
+  cwd "/home/vagrant/hdl/projects/adv7511/zed"
+  code <<-EOS
+       source /opt/Xilinx/Vivado/#{node['vivado']['version']}/settings64.sh
+       unset LD_LIBRARY_PATH
+       make
+   EOS
+  action :run
+  user  "vagrant"
   group "vagrant"
 end

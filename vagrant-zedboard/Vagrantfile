@@ -51,7 +51,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # vb.gui = true
 
     # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "2048", "--cpus", "2", "--ioapic", "on"]
+    vb.customize ["modifyvm", :id, "--memory", "4096", "--cpus", "2", "--ioapic", "on"]
   end
   #
   # View the documentation for the provider you're using for more
@@ -95,7 +95,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # chef.add_role "web"
 
     # You may also specify custom JSON attributes:
-    # chef.json = { mysql_password: "foo" }
+    chef.json = {
+      vivado: {
+        version: "2015.2",
+        date: "0626",
+        file_head: "Xilinx_Vivado_SDK_Lin"
+      }
+    }
   end
 
   # Enable provisioning with chef server, specifying the chef server URL,
