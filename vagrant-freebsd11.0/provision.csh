@@ -33,6 +33,7 @@ setenv XCPP ${CROSS_BINUTILS_PREFIX}cpp
 setenv X_COMPILER_TYPE gcc
 setenv WITHOUT_FORMAT_EXTENSIONS yes
 setenv WITHOUT_NTP yes
+setenv WITHOUT_SHAREDOCS yes
 
 make TARGET_ARCH=riscv64 buildworld
 make TARGET_ARCH=riscv64 KERNCONF=SPIKE buildkernel # for Spike
@@ -58,8 +59,8 @@ git clone https://github.com/freebsd-riscv/riscv-pk
 cd riscv-pk
 mkdir build && cd build
 setenv PREFIX $HOME/riscv
-setenv MYOBJDIR "/home/vagrant/obj/riscv.riscv64/home/vagrant/freebsd-riscv/"
-setenv CFLAGS "-msoft-float --sysroot=${MYOBJDIR}/tmp"
+setenv MYOBJDIR "/home/${USER}/obj/riscv.riscv64/home/${USER}/freebsd-riscv/"
+setenv CFLAGS "-mno-float --sysroot=${MYOBJDIR}/tmp"
 setenv CXX "c++"
 setenv CPP "cpp"
 setenv LDFLAGS "-L. -L${MYOBJDIR}/tmp/usr/lib/"
@@ -102,7 +103,7 @@ gmake install
 git clone https://github.com/freebsd-riscv/riscv-isa-sim
 cd riscv-isa-sim
 mkdir build && cd build
-setenv CFLAGS "-x c++-header"  ## trying to insert
+setenv CFLAGS "-x c++-header"
 ../configure --prefix=$PREFIX --with-fesvr=$PREFIX
 gmake install
 #TODO: failed to compile, stick "-x c++-header" in the problematic command line

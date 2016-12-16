@@ -25,18 +25,17 @@ packages.each do |pkg|
   end
 end
 
-git "/home/vagrant/rocket-chip" do
-  repository "https://github.com/ucb-bar/rocket-chip.git"
-  revision "boom"
+git "/home/vagrant/firrtl" do
+  repository "https://github.com/ucb-bar/firrtl.git"
   enable_submodules true
   action :sync
   user "vagrant"
   group "vagrant"
 end
 
-execute "Set Environment of RISCV-tools" do
-  cwd "/home/vagrant/rocket-chip/riscv-tools/"
-  command "git submodule update --init --recursive"
+execute "Make Build-scala" do
+  cwd "/home/vagrant/firrtl/"
+  command "make build-scala"
   action :run
   user "vagrant"
   group "vagrant"
