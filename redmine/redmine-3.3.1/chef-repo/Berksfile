@@ -1,0 +1,8 @@
+source "https://supermarket.chef.io"
+
+cookbook 'rails'
+cookbook 'ruby_rbenv'
+cookbook 'ruby_build'
+cookbook 'mysql', '~> 5.6'
+cookbook 'database'
+cookbook 'passenger_apache2'
